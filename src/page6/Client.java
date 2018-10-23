@@ -13,11 +13,13 @@ public class Client {
         try {
             socket = new Socket("localhost",8081);//创建Socket, 请求服务端
             System.out.println("客户端已经连接上");
+            BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintStream ps = new PrintStream(socket.getOutputStream());
+
             while(true){
-                BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintStream ps = new PrintStream(socket.getOutputStream());
+
                 Scanner scanner = new Scanner(System.in);   // 创建Scanner
-                System.out.println("请输入一个字符串6:");    // 给出提示输入
+                System.out.println("请输入一个字符串:");    // 给出提示输入
                 String line = scanner.nextLine();     // 从键盘输入读取一行
                 ps.println(line);//发送到服务端
                 ps.flush();
